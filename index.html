@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matrix Inverse Calculator</title>
+  <style>
+   
+    body{
+font-size: arial, sans-serif;
+background-color: aqua;
+margin: 0;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+height: 100vh;
+    }
+    label{
+        margin-top: 10px;
+        color:blue;
+    }
+    input{
+        padding: 8px;
+        margin:5px;
+        box-sizing: border-box;
+    }
+    button{
+        padding: 10px;
+        margin-top: 10px;
+        background-color: blueviolet;
+        color: black;
+        border:none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    #result{
+        margin-top: 20px;
+    }
+    table{
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+    table th,td{
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
+  </style>
+  <script>
+    function calculateInverse() {
+      const a = parseFloat(document.getElementById('a').value);
+      const b = parseFloat(document.getElementById('b').value);
+      const c = parseFloat(document.getElementById('c').value);
+      const d = parseFloat(document.getElementById('d').value);
+
+    if (isNaN(a) || isNaN(b) || isNaN(c) || isNaN(d)) {
+        alert("Please enter valid numerical values for all matrix elements.");
+        return;
+      }
+
+      const determinant = a * d - b * c;
+
+      if (determinant === 0) {
+        alert("inverse of matrix not possible according to math rules");
+        return;
+      }
+
+      const invA = d / determinant;
+      const invB = -b / determinant;
+      const invC = -c / determinant;
+      const invD = a / determinant;
+
+      const resultTable = document.getElementById('result');
+      resultTable.innerHTML = `
+        <p>Matrix Inverse:</p>
+        <table>
+          <tr>
+            <th>${invA.toFixed(2)}</th>
+            <th>${invB.toFixed(2)}</th>
+          </tr>
+          <tr>
+            <th>${invC.toFixed(2)}</th>
+            <th>${invD.toFixed(2)}</th>
+          </tr>
+        </table>
+      `;
+    }
+  </script>
+</head>
+<body>
+
+  <h2>2x2 Matrix Inverse Calculator</h2>
+
+  <label for="a">a:</label>
+  <input type="number" id="a" placeholder="Enter a">
+
+  <label for="b">b:</label>
+  <input type="number" id="b" placeholder="Enter b">
+
+  <label for="c">c:</label>
+  <input type="number" id="c" placeholder="Enter c">
+
+  <label for="d">d:</label>
+  <input type="number" id="d" placeholder="Enter d">
+
+  <button onclick="calculateInverse()">Calculate Inverse</button>
+
+  <div id="result"></div>
+
+</body>
+</html>
